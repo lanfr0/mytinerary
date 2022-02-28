@@ -16,7 +16,7 @@ export const SidebarCard: React.FC<SidebarCardProps> = ({ empty }) => {
       <div
         className={`flex md:flex-row flex-col p-[10px] rounded-lg h-full transition-all duration-200 ${
           empty
-            ? "bg-white border border-gray-400 hover:border-black"
+            ? "bg-white"
             : "bg-gradient-to-r from-black/10 to-gray-800"
         }`}
       >
