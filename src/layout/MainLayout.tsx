@@ -1,19 +1,26 @@
 import React, { useState } from "react";
 import { Switch } from "@headlessui/react";
 import { SidebarCard } from "../components/sidebar/SidebarCard";
-import { FaCheck, FaTimes } from "react-icons/fa";
-import { TravelCard } from "../components/core/TravelCard";
-import { useForm } from "react-hook-form";
+import { FaTimes } from "react-icons/fa";
+import { CardInfo } from "../components/model/rest";
+import { nanoid } from "nanoid";
+import { TravelDetail } from "../components/core/TravelDetail";
+
+const card: CardInfo[] = [
+  {
+    name: "Londra",
+    from: new Date("25 Mar 2022"),
+    to: new Date("28 Mar 2022"),
+    description:
+      "Viaggio a Lndn. Parto per tre giorni a Londra con Alice. Poca spesa tanta resa e speriamo di non trovare brutto tempo.",
+    budget: 800,
+  },
+];
+
+// TODO: cambiare la sidebar perché lo stretching dell'elemento crea ulteriori render
 
 export const MainLayout: React.FC = () => {
   const [enabled, setEnabled] = useState(false);
-
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
-
 
   return (
     <div className="flex h-screen w-screen bg-[#fcf0e7]">
@@ -26,46 +33,18 @@ export const MainLayout: React.FC = () => {
         </div>
         <div
           className={`${
-            enabled ? "px-2 md:px-12" : "-translate-x-full md:translate-x-0 md:w-44 md:px-2 absolute md:relative"
+            enabled
+              ? "px-2 md:px-12"
+              : "-translate-x-full md:translate-x-0 md:w-44 md:px-2 absolute md:relative"
           } h-full w-2/5 bg-[#ee0131] pt-24 flex flex-col gap-8 transition-all ease-in-out duration-500`}
         >
-          <SidebarCard empty={false} />
+          {card.map((c) => (
+            <SidebarCard card={c} empty={false} key={nanoid()} />
+          ))}
         </div>
       </Switch.Group>
-      <div className="flex flex-col h-full w-full pt-24 px-4 transition-all ease-in-out duration-500 ">
-        <div className="bg-white text-[#062538] rounded-xl shadow-2xl p-6 max-w-full">
-        <form
-          className="flex flex-col items-start gap-6"
-          onSubmit={handleSubmit((data) => {
-            console.log(data);
-          })}
-        >
-          <input
-            className="text-md bg-white text-left focus:outline-none rounded-md p-3 w-full md:w-2/5 focus:bg-gray-50 transition-colors duration-200"
-            placeholder="Name"
-            {...register("name", { required: true })}
-          />
-          <input
-            className="text-md bg-white text-left focus:outline-none rounded-md p-3 w-full md:w-2/5 focus:bg-gray-50 transition-colors duration-200"
-            placeholder="Description"
-            {...register("Description", { required: true })}
-          />
-          <div className="flex flex-row justify-between text-gray-500 w-full">
-            <button
-              className="text-xl border border-gray-200 p-3 rounded-full"
-              type="submit"
-            >
-              <FaCheck />
-            </button>
-            <button
-              className="text-xl border border-gray-200 p-3 rounded-full"
-              type="reset"
-            >
-              <FaTimes />
-            </button>
-          </div>
-        </form>
-        </div>
+      <div className="flex flex-col h-full w-full pt-24 px-4 md:px-12 transition-all ease-in-out duration-500">
+        <TravelDetail cardInfo={card[0]} />
       </div>
     </div>
   );
