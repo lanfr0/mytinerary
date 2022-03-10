@@ -23,9 +23,9 @@ export const MainLayout: React.FC = () => {
   const [enabled, setEnabled] = useState(false);
 
   return (
-    <div className="flex h-screen w-screen bg-[#fcf0e7]">
+    <div className="flex h-screen w-screen">
       <Switch.Group>
-        <div className="fixed w-full z-10 h-12 mt-5 flex justify-between px-5 items-center">
+        <div className="fixed w-full z-10 p-5 flex justify-between px-5 items-center backdrop-blur-sm border-b border-[#ee0131]">
           <Switch checked={enabled} onChange={setEnabled}>
             <FaTimes className="text-2xl text-[#062538]" />
           </Switch>
@@ -35,15 +35,15 @@ export const MainLayout: React.FC = () => {
           className={`${
             enabled
               ? "px-2 md:px-12"
-              : "-translate-x-full md:translate-x-0 md:w-44 md:px-2 absolute md:relative"
-          } h-full w-2/5 bg-[#ee0131] pt-24 flex flex-col gap-8 transition-all ease-in-out duration-500`}
+              : "-translate-x-full md:translate-x-0 md:w-44 md:px-2"
+          } h-full w-2/5 bg-[#ee0131] pt-24 flex flex-col gap-8 transition-all ease-in-out duration-500 fixed`}
         >
           {card.map((c) => (
             <SidebarCard card={c} empty={false} key={nanoid()} />
           ))}
         </div>
       </Switch.Group>
-      <div className="flex flex-col h-full w-full pt-24 px-4 md:px-12 transition-all ease-in-out duration-500">
+      <div className={`${enabled ? "ml-[40%]" : "ml-[11rem]"} w-full flex flex-col h-full pt-24 px-4 md:px-12 transition-all ease-in-out duration-500`}>
         <TravelDetail cardInfo={card[0]} />
       </div>
     </div>

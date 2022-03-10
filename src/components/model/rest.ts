@@ -9,10 +9,11 @@ export type CardInfo = {
 export type Activity = {
     name:string,
     description: string,
-    time: Date
+    time: string
 };
 
-export type Day = {
+export type DayType = {
     name: string,
     day: Date
+    activities: Activity[]
 }
