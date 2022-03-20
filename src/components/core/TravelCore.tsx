@@ -1,9 +1,9 @@
 import React from "react";
 import { FaDollarSign, FaPlus } from "react-icons/fa";
-import { CardInfo, DayType } from "../model/rest";
+import { TripInfo, DayType } from "../model/rest";
 
 interface TravelCoreProps {
-  cardInfo: CardInfo;
+  cardInfo: TripInfo;
 }
 
 function classNames(...classes: string[]) {

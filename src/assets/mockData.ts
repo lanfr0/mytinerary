@@ -1,6 +1,6 @@
-import { CardInfo } from "../components/model/rest";
+import { TripInfo } from "../components/model/rest";
 
-const cards: CardInfo[] = [
+const cards: TripInfo[] = [
   {
     name: "Londra",
     from: new Date("25 Mar 2022"),

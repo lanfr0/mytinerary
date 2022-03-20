@@ -1,8 +1,8 @@
 import React from "react";
-import { CardInfo } from "../model/rest";
+import { TripInfo } from "../model/rest";
 
 interface SidebarCardProps {
-  card: CardInfo;
+  card: TripInfo;
   empty: boolean;
 }
 

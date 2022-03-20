@@ -1,4 +1,4 @@
-export type CardInfo = {
+export type TripInfo = {
   name: string;
   description: string;
   from: Date;
