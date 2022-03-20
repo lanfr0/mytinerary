@@ -15,5 +15,5 @@ export type Activity = {
 export type DayType = {
     name: string,
     day: Date
-    activities: Activity[]
+    details: Activity[]
 }
