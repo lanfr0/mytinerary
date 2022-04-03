@@ -1,9 +1,6 @@
 import React from "react";
-import { TravelCore } from "../routes/core/TravelCore";
 import { Sidebar } from "../components/sidebar/Sidebar";
 import { Navbar } from "../components/navbar/Navbar";
-import { Navigate, Route, Routes } from "react-router-dom";
-import { CreationTripForm } from "../routes/newTrip/CreationTripForm";
 import { Home } from "../routes/home/Home";
 
 export const MainLayout: React.FC = () => {
