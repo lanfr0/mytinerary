@@ -17,8 +17,8 @@ export const CardDetails: React.FC = () => {
             </div>
           </div>
         ))}
-        <div className="w-full flex flex-row gap-10 pb-3 bg-red-200">
-          Aggiunti attività
+        <div className="w-full flex flex-row gap-10 pb-3 border border-dashed border-bluePrimary rounded-lg px-3 py-3 ">
+          <p className="transition-all">Aggiunti attività</p>
         </div>
       </div>
     </div>

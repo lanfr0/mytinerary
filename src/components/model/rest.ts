@@ -1,4 +1,5 @@
 export type TripInfo = {
+  id: string;
   name: string;
   description: string;
   from: Date;
@@ -7,13 +8,20 @@ export type TripInfo = {
 };
 
 export type Activity = {
-    name:string,
-    description: string,
-    time: string
+  name: string;
+  description: string;
+  time: string;
 };
 
 export type DayType = {
-    name: string,
-    day: Date
-    details: Activity[]
-}
+  name: string;
+  day: Date;
+  details: Activity[];
+};
+
+export type Day = {
+  id: string;
+  name: string;
+  atDate: Date;
+  tripId: string;
+};

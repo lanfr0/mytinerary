@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useCallback } from "react";
+import { useActiveTripStore } from "../../stores/ActiveTripContext";
 import { TripInfo } from "../model/rest";
 
 interface SidebarCardProps {
@@ -7,12 +8,17 @@ interface SidebarCardProps {
 }
 
 export const SidebarCard: React.FC<SidebarCardProps> = ({ card, empty }) => {
+  const { setActiveTrip } = useActiveTripStore();
+
+  const handleClick = useCallback(() => {
+    setActiveTrip(card);
+  }, [card, setActiveTrip]);
+
   return (
-    <div
-      className={`w-full min-h-[100px] max-w-lg rounded-lg shadow-2xl transition-all duration-200 text-gray-700`}
-    >
-      <div
-        className={`flex flex-col p-[10px] rounded-lg h-full transition-all duration-200 bg-white`}
+    <div className="w-full min-h-[100px] max-w-lg rounded-lg shadow-2xl transition-all duration-200 text-gray-700">
+      <button
+        className="w-full flex flex-col p-[10px] rounded-lg h-full transition-all duration-200 bg-white"
+        onClick={handleClick}
       >
         {empty ? (
           <div className="flex justify-center self-center w-full text-lg uppercase">
@@ -29,7 +35,7 @@ export const SidebarCard: React.FC<SidebarCardProps> = ({ card, empty }) => {
             </div>
           </>
         )}
-      </div>
+      </button>
     </div>
   );
 };
