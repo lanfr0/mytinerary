@@ -4,8 +4,8 @@ const allTrips: TripInfo[] = [
   {
     id: "c340e1c0-681d-40b5-84f9-11ca6837bf1e",
     name: "Londra",
-    from: new Date("25 Mar 2022"),
-    to: new Date("28 Mar 2022"),
+    fromDate: new Date("25 Mar 2022"),
+    toDate: new Date("28 Mar 2022"),
     description:
       "Viaggio a Lndn. Parto per tre giorni a Londra con Alice. Poca spesa tanta resa e speriamo di non trovare brutto tempo.",
     budget: 800,
@@ -13,8 +13,8 @@ const allTrips: TripInfo[] = [
   {
     id: "697555c1-d526-44cd-b078-2d72d1da2e0d",
     name: "Parigi",
-    from: new Date("02 Jan 2020"),
-    to: new Date("06 Jan 2020"),
+    fromDate: new Date("02 Jan 2020"),
+    toDate: new Date("06 Jan 2020"),
     description:
       "Viaggio a Parigi. Regalo di Natale per Alice. Non ci sono mai stato e sembra una città molto carina. Vedremo se mi piacerà.",
     budget: 650,

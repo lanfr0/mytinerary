@@ -2,8 +2,8 @@ export type TripInfo = {
   id: string;
   name: string;
   description: string;
-  from: Date;
-  to: Date;
+  fromDate: Date;
+  toDate: Date;
   budget: number;
 };
 

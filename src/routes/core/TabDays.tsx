@@ -29,7 +29,7 @@ export const TabDays: React.FC = () => {
   const [days, setDays] = useState<Day[]>([] as Day[]);
 
   const handleAddDay = useCallback(() => {
-    const daysOfTrip = dateDiffInDays(activeTrip.from, activeTrip.to);
+    const daysOfTrip = dateDiffInDays(activeTrip.fromDate, activeTrip.toDate);
 
     if (days.length <= daysOfTrip) {
       setDays([
@@ -37,12 +37,12 @@ export const TabDays: React.FC = () => {
         {
           id: nanoid(),
           name: `Day ${days.length + 1}`,
-          atDate: addDays(activeTrip.from, days.length),
+          atDate: addDays(activeTrip.fromDate, days.length),
           tripId: activeTrip.id,
         },
       ]);
     }
-  }, [activeTrip.from, activeTrip.id, activeTrip.to, days]);
+  }, [activeTrip.fromDate, activeTrip.id, activeTrip.toDate, days]);
 
   useEffect(() => {
     console.log(activeTrip);

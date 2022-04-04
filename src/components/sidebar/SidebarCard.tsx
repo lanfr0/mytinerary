@@ -27,8 +27,8 @@ export const SidebarCard: React.FC<SidebarCardProps> = ({ card, empty }) => {
         ) : (
           <>
             <div className="">
-              <p className="">{card.from.toLocaleDateString()}</p>
-              <p className="">{card.to.toLocaleDateString()}</p>
+              <p className="">{card.fromDate.toLocaleDateString()}</p>
+              <p className="">{card.toDate.toLocaleDateString()}</p>
             </div>
             <div className="self-end mt-auto grow sm:text-left md:text-right">
               <h3 className="text-2xl">{card.name}</h3>

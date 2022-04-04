@@ -23,12 +23,12 @@ export const CardHeaderInfo: React.FC<CardHeaderInfoProps> = ({
         <div className="flex flex-row items-center gap-4">
           <div className="w-5 h-5 bg-bluePrimary rounded-full opacity-50" />
           <p className="tracking-wide">
-            {activeCard.from.toLocaleDateString()}
+            {activeCard.fromDate.toLocaleDateString()}
           </p>
         </div>
         <div className="flex flex-row items-center gap-4">
           <div className="w-5 h-5 bg-bluePrimary rounded-full opacity-50" />
-          <p className="tracking-wide">{activeCard.to.toLocaleDateString()}</p>
+          <p className="tracking-wide">{activeCard.toDate.toLocaleDateString()}</p>
         </div>
       </div>
       <div className="w-full md:w-1/3 border border-dashed border-bluePrimary h-24 md:h-64 order-1 md:order-2" />

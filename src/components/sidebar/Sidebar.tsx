@@ -1,13 +1,38 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { nanoid } from "nanoid";
 import { SidebarCard } from "./SidebarCard";
 import { TripInfo } from "../model/rest";
-import { allTrips } from "../../assets/mockData";
 import lodash from "lodash";
 import { Link } from "react-router-dom";
+import apiClient from "../../http-common";
 
 export const Sidebar: React.FC = () => {
-  const [tripPlanned, setTripPlanned] = useState<TripInfo[]>(allTrips); // TODO: fetch trips
+  const [isLoading, setLoading] = useState(false);
+  const [tripPlanned, setTripPlanned] = useState<TripInfo[]>([] as TripInfo[]); // TODO: fetch trips
+
+  async function searchTrips() {
+    try {
+      const response = await apiClient.get("/api/v1/trip");
+
+      const trips = response.data.map((d: TripInfo) => ({
+        ...d,
+        fromDate: new Date(d.fromDate),
+        toDate: new Date(d.toDate),
+      }));
+
+      setTripPlanned(trips);
+
+      setLoading(false);
+    } catch (error) {
+      setLoading(false);
+      console.error(error);
+    }
+  }
+
+  useEffect(() => {
+    setLoading(true);
+    searchTrips();
+  }, []);
 
   const arrow = (
     <svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 800 800">
@@ -55,31 +80,39 @@ export const Sidebar: React.FC = () => {
   );
 
   return (
-    <div className="w-1/3 flex flex-col gap-8 py-28 px-10 bg-bluePrimary transition-all ease-in-out duration-500 overflow-y-auto">
-      {lodash.isEmpty(tripPlanned) ? (
-        <div className="w-full h-full flex flex-col text-white">
-          {newTripCard}
-
-          {arrow}
-
-          <div className="flex flex-col gap-4">
-            <h5 className="text-4xl font-semibold text-center">
-              It looks like there's nothing planned!
-            </h5>
-            <div>
-              <h6 className="text-xl text-center">What are you waiting for?</h6>
-              <p className="text-center">Start planning your next trip!</p>
-            </div>
-          </div>
-        </div>
+    <>
+      {isLoading ? (
+        <p>Sto a fetcha!</p>
       ) : (
-        lodash.sortBy(tripPlanned, ["from"]).map((tp) => (
-          <Link to="/home">
-            <SidebarCard card={tp} empty={false} key={nanoid()} />
-          </Link>
-        ))
+        <div className="w-1/3 flex flex-col gap-8 py-28 px-10 bg-bluePrimary transition-all ease-in-out duration-500 overflow-y-auto">
+          {lodash.isEmpty(tripPlanned) ? (
+            <div className="w-full h-full flex flex-col text-white">
+              {newTripCard}
+
+              {arrow}
+
+              <div className="flex flex-col gap-4">
+                <h5 className="text-4xl font-semibold text-center">
+                  It looks like there's nothing planned!
+                </h5>
+                <div>
+                  <h6 className="text-xl text-center">
+                    What are you waiting for?
+                  </h6>
+                  <p className="text-center">Start planning your next trip!</p>
+                </div>
+              </div>
+            </div>
+          ) : (
+            lodash.sortBy(tripPlanned, ["fromDate"]).map((tp) => (
+              <Link to="/home">
+                <SidebarCard card={tp} empty={false} key={nanoid()} />
+              </Link>
+            ))
+          )}
+          {newTripCard}
+        </div>
       )}
-      {newTripCard}
-    </div>
+    </>
   );
 };
