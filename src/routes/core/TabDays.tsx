@@ -7,6 +7,7 @@ import { nanoid } from "nanoid";
 import { NoActivityPlanned } from "./NoActivityPlanned";
 import { classNames } from "../../utils/clsx";
 import { FaPlus } from "react-icons/fa";
+import apiClient from "../../http-common";
 
 const _MS_PER_DAY = 1000 * 60 * 60 * 24;
 
@@ -26,7 +27,31 @@ function addDays(a: Date, d: number) {
 export const TabDays: React.FC = () => {
   const { activeTrip } = useActiveTripStore();
 
+  const [isLoading, setLoading] = useState(false);
   const [days, setDays] = useState<Day[]>([] as Day[]);
+
+  async function getDays() {
+    try {
+      const response = await apiClient.get(`/api/v1/day/${activeTrip.id}`);
+
+      const gg = response.data.map((day: Day) => ({
+        ...day,
+        atDate: new Date(day.atDate),
+      }));
+
+      setDays(gg);
+
+      setLoading(false);
+    } catch (error) {
+      setLoading(false);
+      console.error(error);
+    }
+  }
+
+  useEffect(() => {
+    setLoading(true);
+    getDays();
+  }, []);
 
   const handleAddDay = useCallback(() => {
     const daysOfTrip = dateDiffInDays(activeTrip.fromDate, activeTrip.toDate);
@@ -43,10 +68,6 @@ export const TabDays: React.FC = () => {
       ]);
     }
   }, [activeTrip.fromDate, activeTrip.id, activeTrip.toDate, days]);
-
-  useEffect(() => {
-    console.log(activeTrip);
-  }, [activeTrip]);
 
   return (
     <div className="grow">
